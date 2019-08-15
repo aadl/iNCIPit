@@ -126,8 +126,9 @@ if ($lb_ip) {
 
 # log request hostname, configuration file used and posted data
 # XXX: posted ncip message log filename should be in config.
+my $now = localtime();
 open (POST_DATA, ">>post_data.txt") or die "Cannot write post_data.txt";
-print POST_DATA "INCOMING REQUEST\t$hostname\n";
+print POST_DATA "INCOMING REQUEST\t$hostname\t$now\n";
 print POST_DATA "CONFIGURATION FILE\t$conffile\n";
 print POST_DATA "$xml\n";
 close POST_DATA;
