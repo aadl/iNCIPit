@@ -858,7 +858,7 @@ sub item_request {
 
     # TODO: should we use the VisibleID for item agency variation of this method call
 
-    my $pid = $doc->findvalue('/NCIPMessage/ItemRequested/UniqueUserId/UserIdentifierValue');
+    my $pid = user_id_from_barcode($doc->findvalue('/NCIPMessage/ItemRequested/UserOptionalFields/VisibleUserId/VisibleUserIdentifier'));
     my $barcode = $doc->findvalue('/NCIPMessage/ItemRequested/UniqueItemId/ItemIdentifierValue');
     my $author = $doc->findvalue('/NCIPMessage/ItemRequested/ItemOptionalFields/BibliographicDescription/Author');
     my $title = $doc->findvalue('/NCIPMessage/ItemRequested/ItemOptionalFields/BibliographicDescription/Title');
@@ -879,7 +879,7 @@ sub item_request {
         unless ( $conf->{behavior}->{no_item_agency_holds} =~ m/^y/i ) {
             # place hold for user UniqueUserId/UniqueAgencyId/Value = institution account
             my $copy = copy_from_barcode($barcode);
-            my $pid2 = 1013459; # XXX CUSTOMIZATION NEEDED XXX # this is the id of a user representing your DCB system, TODO: use agency information to create and link to individual accounts per agency, if needed
+            my $pid2 = 10157796; # XXX CUSTOMIZATION NEEDED XXX # this is the id of a user representing your DCB system, TODO: use agency information to create and link to individual accounts per agency, if needed
             $r = place_simple_hold( $copy->id, $pid2 );
             my $r2 = update_copy( $copy, $conf->{status}->{hold} ); # put into INN-Reach Hold status
         }
