@@ -1490,12 +1490,16 @@ sub create_copy {
     # Create MARC record
     my $record = MARC::Record->new();
     $record->encoding('UTF-8');
-    $record->leader('00881nam a2200193 4500');
+    # Replaced the "a" in character 6 (which is the 7th character) with an "o"
+    # in order to give MeLCat stub bibs (our patrons, their items) a new
+    # bibliographic material code for use with Troy's API.  --  Glen 09/18/2018
+    $record->leader('00881nom a2200193 4500');
     my $datespec = strftime( "%Y%m%d%H%M%S.0", localtime );
     my @fields = ();
     push( @fields, MARC::Field->new( '005', $datespec ) );
     push( @fields, MARC::Field->new( '082', '0', '4', 'a' => $callnumber ) );
     push( @fields, MARC::Field->new( '245', '0', '0', 'a' => $title ) );
+    push( @fields, MARC::Field->new( '999', '0', '0', 'a' => 'MeLCat record' ) );
     $record->append_fields(@fields);
 
     # Convert the record to XML
