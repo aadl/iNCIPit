@@ -1412,7 +1412,11 @@ sub copy_from_barcode {
       OpenSRF::AppSession->create('open-ils.search')
       ->request( 'open-ils.search.asset.copy.find_by_barcode', $barcode )
       ->gather(1);
-    return $response;
+    if (ref($response) eq 'HASH') {
+        return undef;
+    } else {
+        return $response;
+    }
 }
 
 sub locid_from_barcode {
