@@ -517,10 +517,19 @@ sub item_cancelled {
     } else {
         # we are the item agency
         unless ( $conf->{behavior}->{no_item_agency_holds} =~ m/^y/i ) {
+            # Make sure the copy exists!
+            my $copy = copy_from_barcode($barcode);
+            # If copy does not exist, return failure
+            if (ref($copy) eq "HASH") {
+              if ($copy->{textcode} eq 'ASSET_COPY_NOT_FOUND') {
+                staff_log( $taidValue, $faidValue, "Bad Barcode Requested: ". $barcode );
+                fail("cancel request on non-existent item");
+                exit;
+              }
+            }
             # remove hold!
             my $r = cancel_hold($barcode);
-            # TODO: check for any errors or unexpected return values in $r
-            my $copy = copy_from_barcode($barcode);
+
             fail( $copy->{textcode} . " $barcode" ) unless ( blessed $copy);
             $r = update_copy( $copy, 7 ); # set to reshelving (for wiggle room)
             # TODO: check for any errors or unexpected return values in $r
