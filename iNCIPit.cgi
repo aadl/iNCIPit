@@ -1,4 +1,4 @@
-#! /usr/bin/perl 
+#!/usr/bin/perl 
 
 #
 # Copyleft 2014 Jon Scott <mr.jonathon.scott@gmail.com> 
