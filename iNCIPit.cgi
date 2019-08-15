@@ -511,6 +511,13 @@ sub item_cancelled {
         # we are the user agency
         $barcode .= $faidValue;
         my $copy = copy_from_barcode($barcode);
+        if (ref($copy) eq "HASH") {
+            if ($copy->{textcode} eq 'ASSET_COPY_NOT_FOUND') {
+            staff_log( $taidValue, $faidValue, "Bad Barcode Requested: ". $barcode );
+            fail("cancel request on non-existent item");
+            exit;
+            }
+        }
         fail( $copy->{textcode} . " $barcode" ) unless ( blessed $copy);
         my $r = cancel_hold($barcode);
         $r = delete_copy($copy);
@@ -1412,11 +1419,7 @@ sub copy_from_barcode {
       OpenSRF::AppSession->create('open-ils.search')
       ->request( 'open-ils.search.asset.copy.find_by_barcode', $barcode )
       ->gather(1);
-    if (ref($response) eq 'HASH') {
-        return undef;
-    } else {
-        return $response;
-    }
+    return $response;
 }
 
 sub locid_from_barcode {
