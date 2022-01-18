@@ -522,7 +522,7 @@ sub item_cancelled {
             # TODO: check for any errors or unexpected return values in $r
             my $copy = copy_from_barcode($barcode);
             fail( $copy->{textcode} . " $barcode" ) unless ( blessed $copy);
-            $r = update_copy( $copy, 7 ); # set to reshelving (for wiggle room)
+            # $r = update_copy( $copy, 7 ); # set to reshelving (for wiggle room)
             # TODO: check for any errors or unexpected return values in $r
             #
             # XXX other options here could be:
