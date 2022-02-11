@@ -1,8 +1,8 @@
-#!/usr/bin/perl 
+#!/usr/bin/perl
 
 #
-# Copyleft 2014 Jon Scott <mr.jonathon.scott@gmail.com> 
-# Copyleft 2014 Mark Cooper <mark.c.cooper@outlook.com> 
+# Copyleft 2014 Jon Scott <mr.jonathon.scott@gmail.com>
+# Copyleft 2014 Mark Cooper <mark.c.cooper@outlook.com>
 # Copyright 2012-2013 Midwest Consortium for Library Services
 # Copyright 2013 Calvin College
 #     contact Dan Wells <dbw2@calvin.edu>
@@ -307,7 +307,7 @@ Content-type: text/xml
             <ItemIdentifierValue datatype="string">$visid</ItemIdentifierValue>
         </UniqueItemId>
     </ItemRenewedResponse>
-</NCIPMessage> 
+</NCIPMessage>
 
 ITEMRENEWAL
 
@@ -368,7 +368,7 @@ Content-type: text/xml
             <ItemIdentifierValue datatype="string">$unique_item_id</ItemIdentifierValue>
         </UniqueItemId>
     </RenewItemResponse>
-</NCIPMessage> 
+</NCIPMessage>
 
 ITEMRENEWAL
 
@@ -440,7 +440,7 @@ Content-type: text/xml
             <ItemIdentifierValue datatype="string">$visid</ItemIdentifierValue>
         </UniqueItemId>
     </AcceptItemResponse>
-</NCIPMessage> 
+</NCIPMessage>
 
 ACCEPTITEM
 
@@ -487,7 +487,7 @@ Content-type: text/xml
             <ItemIdentifierValue datatype="string">$visid</ItemIdentifierValue>
         </UniqueItemId>
     </ItemReceivedResponse>
-</NCIPMessage> 
+</NCIPMessage>
 
 ITEMRECEIVED
 
@@ -558,7 +558,7 @@ Content-type: text/xml
             <ItemIdentifierValue datatype="string">$barcode</ItemIdentifierValue>
         </UniqueItemId>
     </ItemRequestCancelledResponse>
-</NCIPMessage> 
+</NCIPMessage>
 
 ITEMREQUESTCANCELLED
 
@@ -606,7 +606,7 @@ Content-type: text/xml
             <ItemIdentifierValue datatype="string">$visid</ItemIdentifierValue>
         </UniqueItemId>
     </ItemCheckedInResponse>
-</NCIPMessage> 
+</NCIPMessage>
 
 ITEMCHECKEDIN
 
@@ -657,7 +657,7 @@ Content-type: text/xml
             <ItemIdentifierValue datatype="string">$visid</ItemIdentifierValue>
         </UniqueItemId>
     </ItemCheckedOutResponse>
-</NCIPMessage> 
+</NCIPMessage>
 
 ITEMCHECKEDOUT
 
@@ -716,7 +716,7 @@ Content-type: text/xml
             <ItemIdentifierValue datatype="string">$barcode</ItemIdentifierValue>
         </UniqueItemId>
     </CheckOutItemResponse>
-</NCIPMessage> 
+</NCIPMessage>
 
 CHECKOUTITEM
 
@@ -740,7 +740,7 @@ sub check_in_item {
     # TODO: do we need to do these next steps?  checkin() should handle everything, and we want this to end up in 'reshelving'.  If we are worried about transits, we should handle (abort) them, not just change the status
     ##my $copy = copy_from_barcode($barcode);
     ##fail($copy->{textcode}." $barcode") unless (blessed $copy);
-    ## 	my $r2 = update_copy($copy,0); # Available now 
+    ## 	my $r2 = update_copy($copy,0); # Available now
 
     my $hd = <<CHECKINITEM;
 Content-type: text/xml
@@ -767,7 +767,7 @@ Content-type: text/xml
             <ItemIdentifierValue datatype="string">$barcode</ItemIdentifierValue>
         </UniqueItemId>
     </CheckInItemResponse>
-</NCIPMessage> 
+</NCIPMessage>
 
 CHECKINITEM
 
@@ -838,7 +838,7 @@ Content-type: text/xml
             <ItemIdentifierValue datatype="string">$visid</ItemIdentifierValue>
         </UniqueItemId>
     </ItemShippedResponse>
-</NCIPMessage> 
+</NCIPMessage>
 
 ITEMSHIPPED
 
@@ -933,7 +933,7 @@ Content-type: text/xml
             </ItemDescription>
        </ItemOptionalFields>
     </ItemRequestedResponse>
-</NCIPMessage> 
+</NCIPMessage>
 
 ITEMREQ
 
