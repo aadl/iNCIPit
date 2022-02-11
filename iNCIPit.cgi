@@ -1727,6 +1727,7 @@ sub place_simple_hold {
     # NOTE: When User Agency, we don't know the pickup location until ItemShipped time
     # TODO: When Item Agency and using holds, set this to requested copy's circ lib?
     $ahr->pickup_lib($conf->{hold}->{init_pickup_lib});
+    $ahr->request_lib($conf->{hold}->{request_lib});
     $ahr->phone_notify(''); # TODO: set this based on usr prefs
     $ahr->email_notify(1); # TODO: set this based on usr prefs
     $ahr->frozen('t');
