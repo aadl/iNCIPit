@@ -956,7 +956,7 @@ sub lookupUser {
     my $uidValue;
 
     if ($patron_id_type eq 'barcode') {
-        $uidValue = user_id_from_barcode($id);
+        $uidValue = user_id_from_active_barcode($id);
     } else {
         $uidValue = $id;
     }
@@ -1675,6 +1675,25 @@ sub checkin_accept {
 # actor.usr.id
 # or hash on error
 sub user_id_from_barcode {
+    check_session_time();
+    my ($barcode) = @_;
+
+    my $response;
+
+    my $e = new_editor( authtoken => $session{authtoken} );
+    return $response unless ( $e->checkauth );
+
+    my $card = $e->search_actor_card( { barcode => $barcode } );
+    return $e->event unless ($card);
+
+    $response = $card->[0]->usr if (@$card);
+
+    $e->finish;
+
+    return $response;
+}
+
+sub user_id_from_active_barcode {
     check_session_time();
     my ($barcode) = @_;
 
